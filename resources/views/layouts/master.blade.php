@@ -167,48 +167,69 @@
             <a class="nav-link" href="{{ route('about') }}">ABOUT US</a>
         </li>
         
-        @auth
-            <!-- Logged in user menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('reservations.my') }}">
-                    <i class="fas fa-calendar-check"></i> MY RESERVATIONS
+       @auth
+    <!-- Logged in user menu -->
+    @if(Auth::user()->isBusiness())
+        <!-- Business User Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('business.dashboard') }}">
+                <i class="fas fa-tachometer-alt"></i> DASHBOARD
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('business.hotels.index') }}">
+                <i class="fas fa-hotel"></i> MY HOTELS
+            </a>
+        </li>
+    @else
+        <!-- Guest User Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('reservations.my') }}">
+                <i class="fas fa-calendar-check"></i> MY RESERVATIONS
+            </a>
+        </li>
+    @endif
+    
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+            @if(Auth::user()->isBusiness())
+                <span class="badge bg-success">Business</span>
+            @endif
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+            @if(Auth::user()->isBusiness())
+                <li><a class="dropdown-item" href="{{ route('business.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a class="dropdown-item" href="{{ route('business.hotels.index') }}"><i class="fas fa-hotel"></i> My Hotels</a></li>
+            @else
+                <li><a class="dropdown-item" href="{{ route('reservations.my') }}"><i class="fas fa-list"></i> My Bookings</a></li>
+            @endif
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                    <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
-                    @if(Auth::user()->isBusiness())
-                        <span class="badge bg-success">Business</span>
-                    @endif
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
-                    <li><a class="dropdown-item" href="{{ route('reservations.my') }}"><i class="fas fa-list"></i> My Bookings</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        @else
-            <!-- Guest menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">
-                    <i class="fas fa-sign-in-alt"></i> LOGIN
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link btn btn-primary text-white ms-2" href="{{ route('register') }}">
-                    <i class="fas fa-user-plus"></i> REGISTER
-                </a>
-            </li>
-        @endauth
+        </ul>
+    </li>
+@else
+    <!-- Guest menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}">
+            <i class="fas fa-sign-in-alt"></i> LOGIN
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link btn btn-primary text-white ms-2" href="{{ route('register') }}">
+            <i class="fas fa-user-plus"></i> REGISTER
+        </a>
+    </li>
+@endauth
     </ul>
 </div>
     </nav>

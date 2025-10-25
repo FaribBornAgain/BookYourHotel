@@ -11,12 +11,15 @@ class Room extends Model
     use HasFactory;
 
     protected $fillable = [
+        'hotel_id',
         'name',
         'type',
         'description',
         'price',
         'capacity',
         'image',
+        'featured_image',
+        'gallery_images',
         'amenities',
         'available_rooms'
     ];
@@ -24,15 +27,20 @@ class Room extends Model
     protected $casts = [
         'price' => 'decimal:2',
         'capacity' => 'integer',
-        'available_rooms' => 'integer'
+        'available_rooms' => 'integer',
+        'gallery_images' => 'array'
     ];
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
 
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
 
-    // NEW: Relationship with RoomFacility
     public function facilities()
     {
         return $this->belongsToMany(RoomFacility::class, 'room_room_facility');
@@ -43,7 +51,6 @@ class Room extends Model
         return $this->amenities ? explode(',', $this->amenities) : [];
     }
 
-    // NEW: Check if room type
     public function isStandard()
     {
         return $this->type === 'standard';

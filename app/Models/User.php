@@ -38,8 +38,15 @@ class User extends Authenticatable
         return $this->user_type === 'business';
     }
 
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
+    // Relationship: User has many Hotels (for business accounts)
+public function hotels()
+{
+    return $this->hasMany(Hotel::class);
+}
+
+// Relationship: User has many Reservations (for guest accounts)
+public function reservations()
+{
+    return $this->hasMany(Reservation::class);
+}
 }

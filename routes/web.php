@@ -68,3 +68,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/transactions/status/{status}', [TransactionController::class, 'filterByStatus'])->name('transactions.filterByStatus');
     Route::post('/admin/transactions/filter-dates', [TransactionController::class, 'filterByDateRange'])->name('transactions.filterByDateRange');
 });
+// Business Dashboard Routes (Protected - Business users only)
+Route::middleware(['auth'])->prefix('business')->name('business.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\Business\DashboardController::class, 'index'])->name('dashboard');
+    
+    // Hotels Management
+    Route::resource('hotels', App\Http\Controllers\Business\HotelController::class);
+    
+    // Rooms Management
+    Route::get('/hotels/{hotel}/rooms/create', [App\Http\Controllers\Business\BusinessRoomController::class, 'create'])->name('rooms.create');
+    Route::post('/hotels/{hotel}/rooms', [App\Http\Controllers\Business\BusinessRoomController::class, 'store'])->name('rooms.store');
+    Route::get('/hotels/{hotel}/rooms/{room}/edit', [App\Http\Controllers\Business\BusinessRoomController::class, 'edit'])->name('rooms.edit');
+    Route::put('/hotels/{hotel}/rooms/{room}', [App\Http\Controllers\Business\BusinessRoomController::class, 'update'])->name('rooms.update');
+    Route::delete('/hotels/{hotel}/rooms/{room}', [App\Http\Controllers\Business\BusinessRoomController::class, 'destroy'])->name('rooms.destroy');
+});
+
+// Public Hotel/Destination Routes
+Route::get('/hotels/{id}', [App\Http\Controllers\HotelPublicController::class, 'show'])->name('hotels.show');
+Route::get('/destinations/{id}', [App\Http\Controllers\DestinationController::class, 'show'])->name('destination.show');
+Route::get('/property-types/{id}', [App\Http\Controllers\PropertyTypeController::class, 'show'])->name('property-type.show');
