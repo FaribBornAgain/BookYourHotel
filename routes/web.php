@@ -88,3 +88,18 @@ Route::middleware(['auth'])->prefix('business')->name('business.')->group(functi
 Route::get('/hotels/{id}', [App\Http\Controllers\HotelPublicController::class, 'show'])->name('hotels.show');
 Route::get('/destinations/{id}', [App\Http\Controllers\DestinationController::class, 'show'])->name('destination.show');
 Route::get('/property-types/{id}', [App\Http\Controllers\PropertyTypeController::class, 'show'])->name('property-type.show');
+
+// Payment Routes (bKash)
+Route::get('/payment/bkash/{reservationId}', [PaymentController::class, 'bkashForm'])->name('payment.bkash.form');
+Route::post('/payment/bkash/process', [PaymentController::class, 'bkashProcess'])->name('payment.bkash.process');
+
+// Admin Routes (Protected)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/bookings', [App\Http\Controllers\Admin\AdminDashboardController::class, 'bookings'])->name('bookings');
+    Route::get('/users', [App\Http\Controllers\Admin\AdminDashboardController::class, 'users'])->name('users');
+    Route::get('/hotels', [App\Http\Controllers\Admin\AdminDashboardController::class, 'hotels'])->name('hotels');
+    
+    // Verify bKash payment
+    Route::post('/payment/{id}/verify', [PaymentController::class, 'verifyBkash'])->name('payment.verify');
+});

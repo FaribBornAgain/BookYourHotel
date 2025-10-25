@@ -59,30 +59,40 @@
                             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
 
                             <div class="mb-4">
-                                <div class="form-check mb-3 p-3 border rounded">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" required>
-                                    <label class="form-check-label" for="credit_card">
-                                        <i class="fas fa-credit-card"></i> <strong>Credit Card</strong>
-                                        <p class="text-muted small mb-0">Pay securely with your credit card</p>
-                                    </label>
-                                </div>
+    <!-- bKash Payment -->
+    <div class="form-check mb-3 p-3 border rounded" style="border-left: 4px solid #E2136E !important;">
+        <input class="form-check-input" type="radio" name="payment_method" id="bkash" value="bkash" required>
+        <label class="form-check-label" for="bkash">
+            <img src="https://seeklogo.com/images/B/bkash-logo-835789094F-seeklogo.com.png" height="24" alt="bKash">
+            <strong>bKash Payment</strong>
+            <p class="text-muted small mb-0">Pay with bKash - Fast & Secure</p>
+        </label>
+    </div>
 
-                                <div class="form-check mb-3 p-3 border rounded">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="bank_transfer" value="bank_transfer" required>
-                                    <label class="form-check-label" for="bank_transfer">
-                                        <i class="fas fa-university"></i> <strong>Bank Transfer</strong>
-                                        <p class="text-muted small mb-0">Transfer to our bank account</p>
-                                    </label>
-                                </div>
+    <div class="form-check mb-3 p-3 border rounded">
+        <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" required>
+        <label class="form-check-label" for="credit_card">
+            <i class="fas fa-credit-card"></i> <strong>Credit/Debit Card</strong>
+            <p class="text-muted small mb-0">Pay securely with your card</p>
+        </label>
+    </div>
 
-                                <div class="form-check mb-3 p-3 border rounded">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="cash" value="cash" required>
-                                    <label class="form-check-label" for="cash">
-                                        <i class="fas fa-money-bill-wave"></i> <strong>Cash on Arrival</strong>
-                                        <p class="text-muted small mb-0">Pay when you check-in</p>
-                                    </label>
-                                </div>
-                            </div>
+    <div class="form-check mb-3 p-3 border rounded">
+        <input class="form-check-input" type="radio" name="payment_method" id="bank_transfer" value="bank_transfer" required>
+        <label class="form-check-label" for="bank_transfer">
+            <i class="fas fa-university"></i> <strong>Bank Transfer</strong>
+            <p class="text-muted small mb-0">Transfer to our bank account</p>
+        </label>
+    </div>
+
+    <div class="form-check mb-3 p-3 border rounded">
+        <input class="form-check-input" type="radio" name="payment_method" id="cash" value="cash" required>
+        <label class="form-check-label" for="cash">
+            <i class="fas fa-money-bill-wave"></i> <strong>Cash on Arrival</strong>
+            <p class="text-muted small mb-0">Pay when you check-in</p>
+        </label>
+    </div>
+</div>
 
                             <button type="submit" class="btn btn-primary btn-lg w-100">
                                 <i class="fas fa-lock"></i> COMPLETE PAYMENT

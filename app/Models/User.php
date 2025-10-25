@@ -17,6 +17,7 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type',
+        'is_admin',
     ];
 
     protected $hidden = [
@@ -26,6 +27,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
 
     public function isGuest()
@@ -38,15 +40,18 @@ class User extends Authenticatable
         return $this->user_type === 'business';
     }
 
-    // Relationship: User has many Hotels (for business accounts)
-public function hotels()
-{
-    return $this->hasMany(Hotel::class);
-}
+    public function isAdmin()
+    {
+        return $this->is_admin === true;
+    }
 
-// Relationship: User has many Reservations (for guest accounts)
-public function reservations()
-{
-    return $this->hasMany(Reservation::class);
-}
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function hotels()
+    {
+        return $this->hasMany(Hotel::class);
+    }
 }

@@ -16,6 +16,9 @@ class Hotel extends Model
         'property_type_id',
         'name',
         'location',
+        'latitude',
+        'longitude',
+        'map_address',
         'description',
         'phone',
         'email',
@@ -26,7 +29,9 @@ class Hotel extends Model
     ];
 
     protected $casts = [
-        'gallery_images' => 'array'
+        'gallery_images' => 'array',
+        'latitude' => 'decimal:8',
+        'longitude' => 'decimal:8',
     ];
 
     public function user()
@@ -67,5 +72,10 @@ class Hotel extends Model
     public function getMinPriceAttribute()
     {
         return $this->rooms()->min('price');
+    }
+
+    public function hasCoordinates()
+    {
+        return !is_null($this->latitude) && !is_null($this->longitude);
     }
 }

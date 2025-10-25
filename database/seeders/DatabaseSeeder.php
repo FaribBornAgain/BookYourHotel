@@ -142,5 +142,7 @@ class DatabaseSeeder extends Seeder
         RoomFacility::create(['name' => 'Mini Bar', 'description' => 'Refrigerator with drinks']);
         RoomFacility::create(['name' => 'WiFi', 'description' => 'Free high-speed internet']);
         RoomFacility::create(['name' => 'Bathtub', 'description' => 'Luxury bathtub']);
+
+        $this->call(AdminSeeder::class);
     }
 }

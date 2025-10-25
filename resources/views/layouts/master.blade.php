@@ -190,21 +190,40 @@
         </li>
     @endif
     
+    @auth
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
             <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
             @if(Auth::user()->isBusiness())
                 <span class="badge bg-success">Business</span>
             @endif
+            @if(Auth::user()->isAdmin())
+                <span class="badge bg-danger">Admin</span>
+            @endif
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
-            @if(Auth::user()->isBusiness())
-                <li><a class="dropdown-item" href="{{ route('business.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a class="dropdown-item" href="{{ route('business.hotels.index') }}"><i class="fas fa-hotel"></i> My Hotels</a></li>
-            @else
-                <li><a class="dropdown-item" href="{{ route('reservations.my') }}"><i class="fas fa-list"></i> My Bookings</a></li>
+            
+            @if(Auth::user()->isAdmin())
+                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-cog"></i> Admin Dashboard
+                </a></li>
+                <li><hr class="dropdown-divider"></li>
             @endif
+            
+            @if(Auth::user()->isBusiness())
+                <li><a class="dropdown-item" href="{{ route('business.dashboard') }}">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a></li>
+                <li><a class="dropdown-item" href="{{ route('business.hotels.index') }}">
+                    <i class="fas fa-hotel"></i> My Hotels
+                </a></li>
+            @else
+                <li><a class="dropdown-item" href="{{ route('reservations.my') }}">
+                    <i class="fas fa-list"></i> My Bookings
+                </a></li>
+            @endif
+            
             <li><hr class="dropdown-divider"></li>
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -217,6 +236,7 @@
             </li>
         </ul>
     </li>
+@endauth
 @else
     <!-- Guest menu -->
     <li class="nav-item">

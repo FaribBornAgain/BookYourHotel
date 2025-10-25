@@ -30,6 +30,37 @@
                                     <label class="form-label">Location *</label>
                                     <input type="text" name="location" class="form-control @error('location') is-invalid @enderror" 
                                            value="{{ old('location') }}" required placeholder="e.g., Dhaka, Bangladesh">
+                                           <div class="mb-3">
+    <label class="form-label">Map Location (Optional)</label>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="text" name="latitude" id="latitude" class="form-control" 
+                   placeholder="Latitude (e.g., 23.8103)" step="any">
+        </div>
+        <div class="col-md-6">
+            <input type="text" name="longitude" id="longitude" class="form-control" 
+                   placeholder="Longitude (e.g., 90.4125)" step="any">
+        </div>
+    </div>
+    <small class="text-muted">
+        <i class="fas fa-info-circle"></i> Enter coordinates or search below
+    </small>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Search Location on Map</label>
+    <input type="text" id="map-search" class="form-control" placeholder="Search for a place...">
+    <div id="map" style="width: 100%; height: 400px; margin-top: 10px; border-radius: 8px;"></div>
+    <small class="text-muted">
+        Click on the map to set hotel location
+    </small>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Map Address</label>
+    <input type="text" name="map_address" id="map_address" class="form-control" 
+           placeholder="Full address from map">
+</div>
                                     @error('location')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -118,6 +149,92 @@
             </div>
         </div>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUSPf9_SIbhHwkylQM0hyKVLadO6TClU&libraries=places"></script>
+<script>
+let map;
+let marker;
+let geocoder;
+
+function initMap() {
+    // Default location (Dhaka, Bangladesh)
+    const defaultLocation = { lat: 23.8103, lng: 90.4125 };
+    
+    // Initialize map
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: defaultLocation,
+        zoom: 13
+    });
+    
+    // Initialize geocoder
+    geocoder = new google.maps.Geocoder();
+    
+    // Add marker
+    marker = new google.maps.Marker({
+        position: defaultLocation,
+        map: map,
+        draggable: true
+    });
+    
+    // Click event on map
+    map.addListener('click', function(event) {
+        placeMarker(event.latLng);
+    });
+    
+    // Drag event on marker
+    marker.addListener('dragend', function(event) {
+        updateCoordinates(event.latLng);
+        reverseGeocode(event.latLng);
+    });
+    
+    // Search box
+    const searchBox = new google.maps.places.SearchBox(document.getElementById('map-search'));
+    
+    searchBox.addListener('places_changed', function() {
+        const places = searchBox.getPlaces();
+        
+        if (places.length == 0) {
+            return;
+        }
+        
+        const place = places[0];
+        
+        if (!place.geometry || !place.geometry.location) {
+            return;
+        }
+        
+        map.setCenter(place.geometry.location);
+        placeMarker(place.geometry.location);
+        
+        // Set address
+        document.getElementById('map_address').value = place.formatted_address;
+    });
+}
+
+function placeMarker(location) {
+    marker.setPosition(location);
+    map.panTo(location);
+    updateCoordinates(location);
+    reverseGeocode(location);
+}
+
+function updateCoordinates(location) {
+    document.getElementById('latitude').value = location.lat().toFixed(8);
+    document.getElementById('longitude').value = location.lng().toFixed(8);
+}
+
+function reverseGeocode(location) {
+    geocoder.geocode({ location: location }, function(results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+                document.getElementById('map_address').value = results[0].formatted_address;
+            }
+        }
+    });
+}
+
+// Initialize map when page loads
+window.onload = initMap;
+</script>
 </section>
 
 <script>

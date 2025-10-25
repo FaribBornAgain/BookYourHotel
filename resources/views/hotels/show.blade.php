@@ -145,6 +145,76 @@
         </div>
     </div>
 </section>
+<!-- Hotel Location Map -->
+@if($hotel->hasCoordinates())
+<section class="py-4" style="background: #f8f9fa;">
+    <div class="container">
+        <h3 class="mb-4"><i class="fas fa-map-marker-alt"></i> Location</h3>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div id="hotel-map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Address</h5>
+                        <p>
+                            <i class="fas fa-map-marker-alt text-danger"></i> 
+                            {{ $hotel->map_address ?? $hotel->location }}
+                        </p>
+                        <hr>
+                        <h6>Coordinates</h6>
+                        <p class="small mb-0">
+                            <strong>Lat:</strong> {{ $hotel->latitude }}<br>
+                            <strong>Lng:</strong> {{ $hotel->longitude }}
+                        </p>
+                        <hr>
+                        <a href="https://www.google.com/maps?q={{ $hotel->latitude }},{{ $hotel->longitude }}" 
+                           target="_blank" class="btn btn-primary w-100">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBUSPf9_SIbhHwkylQM0hyKVLadO6TClU"></script>
+<script>
+function initHotelMap() {
+    const hotelLocation = {
+        lat: {{ $hotel->latitude }},
+        lng: {{ $hotel->longitude }}
+    };
+    
+    const map = new google.maps.Map(document.getElementById('hotel-map'), {
+        center: hotelLocation,
+        zoom: 15
+    });
+    
+    const marker = new google.maps.Marker({
+        position: hotelLocation,
+        map: map,
+        title: '{{ $hotel->name }}',
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+        }
+    });
+    
+    const infoWindow = new google.maps.InfoWindow({
+        content: '<div style="padding: 10px;"><h6>{{ $hotel->name }}</h6><p>{{ $hotel->location }}</p></div>'
+    });
+    
+    marker.addListener('click', function() {
+        infoWindow.open(map, marker);
+    });
+}
+
+window.onload = initHotelMap;
+</script>
+@endif
 
 <!-- Available Rooms -->
 <section class="py-4" style="background: #f8f9fa;">
