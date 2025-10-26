@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-
+    
     public function index()
     {
         // Check if user is business
@@ -23,13 +23,17 @@ class DashboardController extends Controller
             return redirect()->route('home')->with('error', 'Access denied! Business account required.');
         }
 
-        $hotels = Auth::user()->hotels()->with('rooms')->get();
+        // Fetch all hotels owned by this business user with their rooms & reservations
+        $hotels = Auth::user()->hotels()->with(['rooms', 'reservations'])->get();
+
+        // Calculate totals
         $totalHotels = $hotels->count();
-        $totalRooms = Room::where('hotel_id', $hotels->pluck('id'))->count();
-        $totalBookings = Auth::user()->hotels()->with('reservations')->get()->sum(function($hotel) {
+        $totalRooms = Room::whereIn('hotel_id', $hotels->pluck('id'))->count();
+        $totalBookings = $hotels->sum(function ($hotel) {
             return $hotel->reservations->count();
         });
 
+        // Pass data to the view
         return view('business.dashboard', compact('hotels', 'totalHotels', 'totalRooms', 'totalBookings'));
     }
 }
