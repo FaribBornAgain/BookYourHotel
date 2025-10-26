@@ -1,12 +1,12 @@
 <!-- File: resources/views/reservations/my-reservations.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'My Reservations - Hotel Hebat')
+@section('title', 'My Reservations - BookYourHotel')
 
 @section('content')
 <section class="py-5">
     <div class="container">
-        <h2 class="text-center mb-5">Daftar Transaksi</h2>
+        <h2 class="text-center mb-5">Your Dashboard</h2>
 
         @if(auth()->check() && isset($reservations) && $reservations->count() > 0)
             <!-- Show reservations if user is logged in and has bookings -->
@@ -16,13 +16,13 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Reservation #</th>
-                                <th>Tipe Kamar</th>
+                                <th>Hotel Type</th>
                                 <th>Check-in</th>
                                 <th>Check-out</th>
-                                <th>Jumlah Pesanan</th>
-                                <th>Total Harga</th>
+                                <th>Room Type</th>
+                                <th>Total Guest</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,13 +71,13 @@
                     <table class="table table-hover">
                         <thead class="table-light">
                             <tr>
-                                <th>Tipe Kamar</th>
-                                <th>Nomor Kamar</th>
-                                <th>Jumlah Pesanan</th>
-                                <th>Harga Permalam</th>
-                                <th>Total Harga</th>
-                                <th>Status Transaksi</th>
-                                <th>Aksi</th>
+                                <th>Hotel Type</th>
+                                <th>Room Type</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Total Guest</th>
+                                <th>Status</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

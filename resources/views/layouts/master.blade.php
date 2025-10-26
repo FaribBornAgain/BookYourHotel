@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Hotel Hebat')</title>
+    <title>@yield('title', 'BookYourHotel')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -283,14 +283,13 @@
             <div class="row">
                 <div class="col-md-4 footer-section">
                     <h5>ABOUT AGENCY</h5>
-                    <p>The world has become so fast paced that people don't want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point.</p>
-                </div>
+                        <p>In today’s fast-paced world, people no longer wish to pause and read lengthy pages of text — they seek stories that speak through visuals and emotions. From the bustling streets of Dhaka to the serene rivers of the Sundarbans, Bangladesh thrives on movement, color, and rhythm. A well-crafted presentation captures that same spirit — quick to feel, easy to understand, and deeply memorable.</p>                </div>
                 <div class="col-md-4 footer-section">
                     <h5>NEWSLETTER</h5>
                     <p>For business professionals caught between high OEM price and mediocre print and graphic output.</p>
                 </div>
                 <div class="col-md-4 footer-section">
-                    <h5>INSTAFEED</h5>
+                    <h5>Social Handles</h5>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -301,7 +300,7 @@
             </div>
             <hr style="border-color: rgba(255,255,255,0.2); margin: 30px 0;">
             <div class="text-center">
-                <p>&copy; 2024 Hotel Hebat. All rights reserved.</p>
+                <p>&copy; 2025 BookYourHotel. All rights reserved.</p>
             </div>
         </div>
     </footer>

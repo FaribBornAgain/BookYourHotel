@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Register - Hotel Hebat')
+@section('title', 'Register - BookYourHotel')
 
 @section('content')
 <section class="py-5">

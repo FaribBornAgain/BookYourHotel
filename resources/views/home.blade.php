@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Hotel Hebat - Book Hotels & Accommodations')
+@section('title', 'BookYourHotel - Book Hotels & Accommodations')
 
 @push('styles')
 <style>
@@ -299,7 +299,7 @@
 <!-- Why Choose Us -->
 <section class="why-choose">
     <div class="container">
-        <h2 class="section-title text-center">Why book with Hotel Hebat?</h2>
+        <h2 class="section-title text-center">Why book with BookYourHotel?</h2>
         <div class="row">
             <div class="col-md-3">
                 <div class="feature-box">
@@ -334,6 +334,7 @@
 </section>
 
 <!-- Trending Destinations -->
+<!-- Trending Destinations -->
 @if(isset($destinations) && $destinations->count() > 0)
 <section class="trending-destinations">
     <div class="container">
@@ -346,7 +347,13 @@
                 <a href="{{ route('destination.show', $destination->id) }}" class="text-decoration-none">
                     <div class="destination-card">
                         @if($destination->image)
-                            <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}">
+                            @if(filter_var($destination->image, FILTER_VALIDATE_URL))
+                                <!-- External URL -->
+                                <img src="{{ $destination->image }}" alt="{{ $destination->name }}" loading="lazy">
+                            @else
+                                <!-- Uploaded file -->
+                                <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}">
+                            @endif
                         @else
                             <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=600" alt="{{ $destination->name }}">
                         @endif
@@ -362,7 +369,7 @@
     </div>
 </section>
 @endif
-
+<!-- Browse by Property Type -->
 <!-- Browse by Property Type -->
 @if(isset($propertyTypes) && $propertyTypes->count() > 0)
 <section class="property-types">
@@ -375,13 +382,17 @@
                 <a href="{{ route('property-type.show', $type->id) }}" class="text-decoration-none">
                     <div class="card property-card">
                         @if($type->image)
-                            <img src="{{ asset('storage/' . $type->image) }}" alt="{{ $type->name }}">
+                            @if(filter_var($type->image, FILTER_VALIDATE_URL))
+                                <img src="{{ $type->image }}" alt="{{ $type->name }}" loading="lazy">
+                            @else
+                                <img src="{{ asset('storage/' . $type->image) }}" alt="{{ $type->name }}">
+                            @endif
                         @else
                             <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400" alt="{{ $type->name }}">
                         @endif
                         <div class="card-body">
                             <h5>{{ $type->name }}</h5>
-                            <p class="text-muted mb-0">{{ $type->hotels->count() }} properties</p>
+                            <p class="text-muted mb-0">{{ $type->hotels_count ?? 0 }} properties</p>
                         </div>
                     </div>
                 </a>
@@ -391,7 +402,7 @@
     </div>
 </section>
 @endif
-
+<!-- Featured Hotels -->
 <!-- Featured Hotels -->
 <section class="featured-hotels">
     <div class="container">
@@ -403,9 +414,11 @@
                 <div class="col-md-3">
                     <div class="card hotel-card">
                         @if($hotel->featured_image)
-                            <img src="{{ asset('storage/' . $hotel->featured_image) }}" alt="{{ $hotel->name }}">
-                        @elseif($hotel->image)
-                            <img src="{{ asset('storage/' . $hotel->image) }}" alt="{{ $hotel->name }}">
+                            @if(filter_var($hotel->featured_image, FILTER_VALIDATE_URL))
+                                <img src="{{ $hotel->featured_image }}" alt="{{ $hotel->name }}" loading="lazy">
+                            @else
+                                <img src="{{ asset('storage/' . $hotel->featured_image) }}" alt="{{ $hotel->name }}">
+                            @endif
                         @else
                             <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400" alt="{{ $hotel->name }}">
                         @endif
@@ -413,7 +426,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-2">
                                 <h5 class="mb-0">{{ $hotel->name }}</h5>
-                                <span class="badge-rating">9.2</span>
+                                <span class="badge-rating">{{ rand(85, 95) / 10 }}</span>
                             </div>
                             <p class="text-muted small mb-2">
                                 <i class="fas fa-map-marker-alt"></i> {{ $hotel->location }}
@@ -422,46 +435,10 @@
                             
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="price">Rp {{ number_format($hotel->min_price ?? 200000, 0, ',', '.') }}</span>
+                                    <span class="price">Tk {{ number_format($hotel->min_price ?? 200000, 0, ',', '.') }}</span>
                                     <small class="text-muted d-block">per night</small>
                                 </div>
                                 <a href="{{ route('hotels.show', $hotel->id) }}" class="btn btn-primary btn-sm">
-                                    See availability
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            @else
-                <!-- Default rooms if no hotels -->
-                @foreach($rooms->take(8) as $room)
-                <div class="col-md-3">
-                    <div class="card hotel-card">
-                        @if($room->featured_image)
-                            <img src="{{ asset('storage/' . $room->featured_image) }}" alt="{{ $room->name }}">
-                        @elseif($room->image)
-                            <img src="{{ asset('storage/' . $room->image) }}" alt="{{ $room->name }}">
-                        @else
-                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'><rect fill='%23e0e0e0' width='400' height='250'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-size='24' font-family='Arial'>{{ $room->type }} Room</text></svg>" alt="{{ $room->name }}">
-                        @endif
-                        
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="mb-0">{{ $room->name }}</h5>
-                                <span class="badge-rating">8.9</span>
-                            </div>
-                            <p class="text-muted small mb-2">
-                                <span class="badge bg-info">{{ ucfirst($room->type) }}</span>
-                            </p>
-                            <p class="text-muted small mb-3">{{ Str::limit($room->description, 80) }}</p>
-                            
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="price">Rp {{ number_format($room->price, 0, ',', '.') }}</span>
-                                    <small class="text-muted d-block">per night</small>
-                                </div>
-                                <a href="{{ route('rooms.show', $room->id) }}" class="btn btn-primary btn-sm">
                                     See availability
                                 </a>
                             </div>
@@ -473,7 +450,6 @@
         </div>
     </div>
 </section>
-
 <!-- Special Offers Banner -->
 <section class="special-offers">
     <div class="container">

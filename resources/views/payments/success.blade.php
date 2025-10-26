@@ -1,7 +1,7 @@
 <!-- File: resources/views/payments/success.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Payment Successful - Hotel Hebat')
+@section('title', 'Payment Successful - BookYourHotel')
 
 @section('content')
 <section class="py-5">
@@ -34,7 +34,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-start"><strong>Amount Paid:</strong></td>
-                                    <td class="text-end"><strong>Rp. {{ number_format($payment->amount, 0, ',', '.') }}</strong></td>
+                                    <td class="text-end"><strong>Tk. {{ number_format($payment->amount, 0, ',', '.') }}</strong></td>
                                 </tr>
                                 <tr>
                                     <td class="text-start"><strong>Payment Date:</strong></td>

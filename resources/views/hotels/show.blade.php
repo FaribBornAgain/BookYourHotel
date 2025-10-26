@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', $hotel->name . ' - Hotel Hebat')
+@section('title', $hotel->name . ' - BookYourHotel')
 
 @push('styles')
 <style>
@@ -135,7 +135,7 @@
                         <h5>Property Highlights</h5>
                         <ul class="list-unstyled">
                             <li><i class="fas fa-check text-success"></i> {{ $hotel->rooms->count() }} room types</li>
-                            <li><i class="fas fa-check text-success"></i> Starting from Rp {{ number_format($hotel->min_price ?? 0, 0, ',', '.') }}</li>
+                            <li><i class="fas fa-check text-success"></i> Starting from Tk {{ number_format($hotel->min_price ?? 0, 0, ',', '.') }}</li>
                             <li><i class="fas fa-check text-success"></i> Free cancellation</li>
                             <li><i class="fas fa-check text-success"></i> No prepayment needed</li>
                         </ul>
@@ -237,7 +237,7 @@ window.onload = initHotelMap;
                             <span class="badge bg-info mb-2">{{ ucfirst($room->type) }}</span>
                         </div>
                         <div class="text-end">
-                            <h3 class="text-primary mb-0">Rp {{ number_format($room->price, 0, ',', '.') }}</h3>
+                            <h3 class="text-primary mb-0">Tk {{ number_format($room->price, 0, ',', '.') }}</h3>
                             <small class="text-muted">per night</small>
                         </div>
                     </div>

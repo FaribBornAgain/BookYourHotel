@@ -1,7 +1,7 @@
 <!-- File: resources/views/payments/create.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Payment - Hotel Hebat')
+@section('title', 'Payment - BookYourHotel')
 
 @section('content')
 <section class="py-5">
@@ -46,7 +46,7 @@
                             </tr>
                             <tr class="table-active">
                                 <td><strong>Total Amount:</strong></td>
-                                <td><strong class="text-primary" style="font-size: 1.3rem;">Rp. {{ number_format($reservation->total_price, 0, ',', '.') }}</strong></td>
+                                <td><strong class="text-primary" style="font-size: 1.3rem;">Tk. {{ number_format($reservation->total_price, 0, ',', '.') }}</strong></td>
                             </tr>
                         </table>
 

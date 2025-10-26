@@ -144,5 +144,10 @@ class DatabaseSeeder extends Seeder
         RoomFacility::create(['name' => 'Bathtub', 'description' => 'Luxury bathtub']);
 
         $this->call(AdminSeeder::class);
+        
+        $this->call([
+            AdminSeeder::class,
+            DemoDataSeeder::class
+        ]);
     }
 }

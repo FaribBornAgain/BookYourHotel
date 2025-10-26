@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', $propertyType->name . ' - Hotel Hebat')
+@section('title', $propertyType->name . ' - BookYourHotel')
 
 @section('content')
 <!-- Property Type Header -->

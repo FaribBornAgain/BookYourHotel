@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', $destination->name . ' Hotels - Hotel Hebat')
+@section('title', $destination->name . ' Hotels - BookYourHotel')
 
 @section('content')
 <!-- Destination Header -->
@@ -42,7 +42,7 @@
                             
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h5 class="text-primary mb-0">Rp {{ number_format($hotel->min_price ?? 0, 0, ',', '.') }}</h5>
+                                    <h5 class="text-primary mb-0">TK {{ number_format($hotel->min_price ?? 0, 0, ',', '.') }}</h5>
                                     <small class="text-muted">per night</small>
                                 </div>
                                 <a href="{{ route('hotels.show', $hotel->id) }}" class="btn btn-primary btn-sm">

@@ -52,7 +52,7 @@
 
                             <div class="row">
                                 <div class="col-md-4 mb-3">
-                                    <label class="form-label">Price per Night (Rp) *</label>
+                                    <label class="form-label">Price per Night (TK) *</label>
                                     <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" 
                                            value="{{ old('price') }}" required min="0" step="1000" placeholder="250000">
                                     @error('price')

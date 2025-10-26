@@ -58,7 +58,7 @@
                                     </p>
                                     <p class="mb-2">{{ Str::limit($room->description, 100) }}</p>
                                     <p class="mb-2">
-                                        <strong>Price:</strong> Rp. {{ number_format($room->price, 0, ',', '.') }}/night
+                                        <strong>Price:</strong> Tk. {{ number_format($room->price, 0, ',', '.') }}/night
                                     </p>
                                     <p class="mb-2">
                                         <strong>Capacity:</strong> {{ $room->capacity }} guests

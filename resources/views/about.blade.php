@@ -1,7 +1,7 @@
 <!-- File: resources/views/about.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'About Us - Hotel Hebat')
+@section('title', 'About Us - BookYourHotel')
 
 @section('content')
 <section class="py-5">
@@ -23,10 +23,7 @@
                     complete facilities, and professional staff, we ensure your stay will be an unforgettable experience.
                 </p>
             </div>
-            <div class="col-md-6">
-                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'><rect fill='%23f39c12' width='600' height='400'/><circle cx='150' cy='150' r='80' fill='%23e67e22'/><circle cx='450' cy='250' r='100' fill='%23d35400'/><rect x='200' y='280' width='200' height='100' fill='%23e67e22'/><text x='300' y='340' text-anchor='middle' fill='white' font-size='24' font-family='Arial'>Hotel Hebat</text></svg>" 
-                     class="img-fluid rounded shadow" alt="About Hotel Hebat">
-            </div>
+            
         </div>
 
         <!-- Stats Section -->

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Admin Dashboard - Hotel Hebat')
+@section('title', 'Admin Dashboard - BookYourHotel')
 
 @push('styles')
 <style>
@@ -110,7 +110,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted">Total Revenue</h6>
-                                    <h2 class="mb-0">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h2>
+                                    <h2 class="mb-0">Tk {{ number_format($totalRevenue, 0, ',', '.') }}</h2>
                                 </div>
                                 <i class="fas fa-money-bill-wave stat-icon text-danger"></i>
                             </div>
@@ -145,7 +145,7 @@
                                 <td><strong>{{ $payment->reservation->reservation_number }}</strong></td>
                                 <td>{{ $payment->reservation->guest_name }}</td>
                                 <td>{{ $payment->reservation->room->hotel->name }}</td>
-                                <td><strong>Rp {{ number_format($payment->amount, 0, ',', '.') }}</strong></td>
+                                <td><strong>Tk {{ number_format($payment->amount, 0, ',', '.') }}</strong></td>
                                 <td>
                                     <small>
                                         <strong>Phone:</strong> {{ $payment->payment_phone }}<br>
@@ -198,7 +198,7 @@
                                 </td>
                                 <td>{{ $booking->room->hotel->name }}</td>
                                 <td>{{ $booking->check_in_date->format('d M Y') }}</td>
-                                <td><strong>Rp {{ number_format($booking->total_price, 0, ',', '.') }}</strong></td>
+                                <td><strong>Tk {{ number_format($booking->total_price, 0, ',', '.') }}</strong></td>
                                 <td>
                                     @if($booking->payment)
                                         <span class="badge bg-info">{{ ucfirst($booking->payment->payment_method) }}</span>

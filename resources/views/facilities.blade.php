@@ -1,7 +1,7 @@
 <!-- File: resources/views/facilities.blade.php -->
 @extends('layouts.master')
 
-@section('title', 'Hotel Facilities - Hotel Hebat')
+@section('title', 'Hotel Facilities - BookYourHotel')
 
 @section('content')
 <!-- Hero Section -->

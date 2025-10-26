@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Login - Hotel Hebat')
+@section('title', 'Login - BookYourHotel')
 
 @section('content')
 <section class="py-5">
@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white text-center">
-                        <h3 class="mb-0">Login to Hotel Hebat</h3>
+                        <h3 class="mb-0">Login to BookYourHotel</h3>
                     </div>
                     <div class="card-body p-5">
                         <form method="POST" action="{{ route('login') }}">

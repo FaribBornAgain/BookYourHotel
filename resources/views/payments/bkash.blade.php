@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'bKash Payment - Hotel Hebat')
+@section('title', 'bKash Payment - BookYourHotel')
 
 @section('content')
 <section class="py-5">
@@ -22,7 +22,7 @@
                                 <li>Open your bKash app</li>
                                 <li>Go to "Send Money" or "Payment"</li>
                                 <li>Enter our bKash Merchant Number: <strong>01812-345678</strong></li>
-                                <li>Send exactly: <strong>Rp {{ number_format($reservation->total_price, 0, ',', '.') }}</strong></li>
+                                <li>Send exactly: <strong>Tk {{ number_format($reservation->total_price, 0, ',', '.') }}</strong></li>
                                 <li>Copy the Transaction ID (TrxID)</li>
                                 <li>Enter details below</li>
                             </ol>
@@ -51,7 +51,7 @@
                                     </tr>
                                     <tr class="table-active">
                                         <td><strong>Total Amount:</strong></td>
-                                        <td><h4 class="mb-0 text-danger">Rp {{ number_format($reservation->total_price, 0, ',', '.') }}</h4></td>
+                                        <td><h4 class="mb-0 text-danger">Tk {{ number_format($reservation->total_price, 0, ',', '.') }}</h4></td>
                                     </tr>
                                 </table>
                             </div>

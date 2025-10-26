@@ -1,7 +1,7 @@
 <!-- File: resources/views/rooms/show.blade.php -->
 @extends('layouts.master')
 
-@section('title', $room->name . ' - Hotel Hebat')
+@section('title', $room->name . ' - BookYourHotel')
 
 @section('content')
 <section class="py-5">
@@ -16,26 +16,26 @@
                 @endif
             </div>
             <div class="col-md-6">
-                <h2>Detail Kamar</h2>
+                <h2>Details</h2>
                 <hr>
                 <div class="mb-3">
-                    <strong>Tipe Kamar:</strong> {{ ucfirst($room->type) }} Room
+                    <strong>Room Type:</strong> {{ ucfirst($room->type) }} Room
                 </div>
                 <div class="mb-3">
-                    <strong>Fasilitas Kamar:</strong> {{ $room->amenities ?? 'AC, TV' }}
+                    <strong>Room Facilities:</strong> {{ $room->amenities ?? 'AC, TV' }}
                 </div>
                 <div class="mb-3">
-                    <strong>Kapasitas Kasur:</strong> {{ $room->capacity }}
+                    <strong>Room Capacity:</strong> {{ $room->capacity }}
                 </div>
                 <div class="mb-3">
-                    <strong>Harga Permalam:</strong> 
-                    <span class="price-badge">Rp. {{ number_format($room->price, 0, ',', '.') }}</span>
+                    <strong>Room Price:</strong> 
+                    <span class="price-badge">TK. {{ number_format($room->price, 0, ',', '.') }}</span>
                 </div>
                 <div class="mb-3">
-                    <strong>Kamar Tersedia:</strong> {{ $room->available_rooms }}
+                    <strong>Seat Available:</strong> {{ $room->available_rooms }}
                 </div>
                 <div class="mb-4">
-                    <strong>Keterangan Tipe Kamar:</strong>
+                    <strong>Description:</strong>
                     <p>{{ $room->description }}</p>
                 </div>
 
@@ -47,7 +47,7 @@
                     <input type="hidden" name="room_id" value="{{ $room->id }}">
                     
                     <div class="mb-3">
-                        <label class="form-label">Jumlah Pesanan</label>
+                        <label class="form-label">Number of Rooms</label>
                         <input type="number" name="number_of_rooms" class="form-control" min="1" max="{{ $room->available_rooms }}" required>
                     </div>
 

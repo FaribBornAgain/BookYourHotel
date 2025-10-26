@@ -32,7 +32,7 @@ class BookingConfirmation extends Notification
         return (new MailMessage)
             ->subject('Booking Confirmation - ' . $reservation->reservation_number)
             ->greeting('Hello ' . $reservation->guest_name . '!')
-            ->line('Thank you for booking with Hotel Hebat.')
+            ->line('Thank you for booking with BookYourHotel.')
             ->line('Your reservation has been confirmed.')
             ->line('**Reservation Details:**')
             ->line('Reservation Number: **' . $reservation->reservation_number . '**')
@@ -45,6 +45,6 @@ class BookingConfirmation extends Notification
             ->action('View Booking', route('reservations.show', $reservation->id))
             ->line('We look forward to welcoming you!')
             ->line('If you have any questions, please contact us.')
-            ->salutation('Best regards, Hotel Hebat Team');
+            ->salutation('Best regards, BookYourHotel Team');
     }
 }
